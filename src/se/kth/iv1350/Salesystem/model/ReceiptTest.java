@@ -36,10 +36,5 @@ public class ReceiptTest {
 		instanceToTest.saveReceipt(sale, 20, 20);
 		assertNotEquals(emptyReceipt, instanceToTest);
 	}
-	
-	@Test
-	public void testToString() {
-		
-	}
 
 }

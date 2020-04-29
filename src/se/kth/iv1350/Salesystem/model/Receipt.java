@@ -46,20 +46,21 @@ public class Receipt {
 	/**
 	 * Converts the receipt to a String to print out.
 	 */
+	@Override
 	public String toString() {
 		String receipt = "\n\n--------------- Receipt ---------------" 
 						+ "\nName: " + name 
 						+ "\nAdress: " + adress 
 						+ "\nDate: " + date 
 						+ "\nTime: " + saleTime 
-						+ "\n--------------------------------------"
+						+ "\n---------------------------------------"
 						+ "\nName\t\tQuantity\tPrice" + mapToString(items)
-						+ "\n--------------------------------------"
+						+ "\n---------------------------------------"
 						+ "\nTotal: \t\t\t\t" + Integer.toString(total)
 						+ "\n\nTotalVAT: \t\t\t" + Double.toString(totalVAT)
 						+ "\n\nCash: \t\t\t\t" + Integer.toString(payment)
 						+ "\n\nChange: \t\t\t" + Integer.toString(change)
-						+ "\n------------ Receipt end -------------";
+						+ "\n------------- Receipt end -------------\n\n";
 		
 		return receipt;
 	}

@@ -74,16 +74,20 @@ public class Sale {
 	 * Increases the quantity bought of the specified Item. Also increases total.
 	 * 
 	 * @param identifier The ID of the item to update the quantity of.
+	 * @return The item with updated quantity.
 	 */
-	public void updateQuantity(int identifier) {
+	public ItemDTO updateQuantity(int identifier) {
+		ItemDTO item = null;
 		for(HashMap.Entry<ItemDTO, Integer> entry : items.entrySet()) {
 			if(identifier == entry.getKey().getIdentifier()) {
 				int currentvalue = entry.getValue();
 				entry.setValue(currentvalue + 1);
 				total += entry.getKey().getPrice();
+				item = entry.getKey();
 				break;
 			}
 		}
+		return item;
 	}
 
 	/**

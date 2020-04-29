@@ -36,4 +36,9 @@ public class ItemDTO {
 		return name;
 	}
 	
+	@Override
+	public String toString() {
+		return name + ", " + description;
+	}
+	
 }

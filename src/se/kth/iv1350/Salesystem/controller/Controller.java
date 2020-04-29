@@ -23,6 +23,10 @@ public class Controller {
 		itemreghandler = new ItemRegistryHandler();
 	}
 	
+	public Sale getSale() {
+		return sale;
+	}
+	
 	/**
 	 * Starts a new sale
 	 */
@@ -39,7 +43,7 @@ public class Controller {
 	public ItemDTO addItem(int identifier) {
 		ItemDTO item = null;
 		if(sale.itemScanned(identifier)) {
-			sale.updateQuantity(identifier);
+			item = sale.updateQuantity(identifier);
 		}
 		else {
 			item = itemreghandler.getItem(identifier);
