@@ -8,42 +8,42 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- * Tests the Controller class and all its methods
- */
+import main.se.kth.iv1350.Salesystem.controller.Controller;
+import main.se.kth.iv1350.Salesystem.model.ItemDTO;
+
 public class ControllerTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
+	private Controller instanceToTest;
+	
 	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
+	public static void setUpBeforeClass() {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
+	public static void tearDownAfterClass() {
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
+		instanceToTest = new Controller();
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
+		instanceToTest = null;
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testStartSale() {
+		instanceToTest.startSale();
+	}
+	
+	@Test
+	public void testAddItem() {
+		instanceToTest.startSale();
+		ItemDTO expResult = new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varatyp 1");
+		ItemDTO result = new ItemDTO(0,0,0,"","");
+		result = instanceToTest.addItem(1111);
+		assertEquals(expResult, result);
 	}
 
 }

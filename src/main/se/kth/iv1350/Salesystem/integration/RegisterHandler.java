@@ -25,6 +25,8 @@ public class RegisterHandler {
 	
 	/**
 	 * Prints the receipt from the printer.
+	 * 
+	 * @param receipt The receipt to print out.
 	 */
 	public void printReceipt(Receipt receipt) {
 		System.out.print(receipt.toString());

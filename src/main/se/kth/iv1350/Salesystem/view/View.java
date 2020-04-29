@@ -1,7 +1,6 @@
 package main.se.kth.iv1350.Salesystem.view;
 
 import main.se.kth.iv1350.Salesystem.controller.Controller;
-import main.se.kth.iv1350.Salesystem.util.ItemID;
 
 /**
  * The class that represents the view of this application.
@@ -14,11 +13,15 @@ public class View {
 		this.contr = contr;
 	}
 	
-	public void programRun() {
+	/**
+	 * Calls all systemoperations in the controller by performing a fake sale.
+	 */
+	public void runFakeExecution() {
 		contr.startSale();
-		contr.addItem(new ItemID(1111));
-		contr.addItem(new ItemID(1113));
-		contr.addItem(new ItemID(1111));
+		System.out.print("A new sale has been started.");
+		contr.addItem(1111);
+		contr.addItem(1113);
+		contr.addItem(1111);
 		contr.endSale(100);
 	}
 }

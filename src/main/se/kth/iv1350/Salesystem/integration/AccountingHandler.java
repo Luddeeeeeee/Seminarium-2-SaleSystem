@@ -12,6 +12,10 @@ public class AccountingHandler {
 	private ArrayList<Sale> salelog;
 	
 
+	public AccountingHandler() {
+		salelog = new ArrayList<Sale>();
+	}
+	
 	public void logAccounting(Sale sale) {
 		salelog.add(sale);
 	}

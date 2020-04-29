@@ -1,17 +1,17 @@
 package main.se.kth.iv1350.Salesystem.model;
 
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
-import main.se.kth.iv1350.Salesystem.util.ItemID;
 
 /**
  * This class represents the complete sale. All purchased items are handled with methods in this class.
  */
 public class Sale {
 
-	private long saleTime;
+	private String date;
+	private LocalTime saleTime;
 	private int total;
 	private HashMap<ItemDTO,Integer> items;
 	private Receipt receipt;
@@ -31,15 +31,25 @@ public class Sale {
 		return total;
 	}
 	
-	public long getSaleTime() {
+	public LocalTime getSaleTime() {
 		return saleTime;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
+	public Receipt getReceipt() {
+		return receipt;
 	}
 	
 	/**
 	 * Saves the time of the sale
 	 */
 	private void setTimeOfSale() {
-		saleTime = System.currentTimeMillis();
+		date = "29 APRIL 2020";
+		saleTime = LocalTime.now();
+		saleTime = saleTime.truncatedTo(ChronoUnit.SECONDS);
 	}
 	
 	/**
@@ -48,7 +58,7 @@ public class Sale {
 	 * @param identifier The ID of the item that should be compared.
 	 * @return If the item has been entered before or not.
 	 */
-	public boolean itemScanned(ItemID identifier) {
+	public boolean itemScanned(int identifier) {
 		boolean itemscanned = false;
 		
 		for(ItemDTO entry : items.keySet()) {
@@ -65,12 +75,12 @@ public class Sale {
 	 * 
 	 * @param identifier The ID of the item to update the quantity of.
 	 */
-	public void updateQuantity(ItemID identifier) {
+	public void updateQuantity(int identifier) {
 		for(HashMap.Entry<ItemDTO, Integer> entry : items.entrySet()) {
 			if(identifier == entry.getKey().getIdentifier()) {
 				int currentvalue = entry.getValue();
 				entry.setValue(currentvalue + 1);
-				total += entry.getKey().getPrice() + entry.getKey().getPrice() * entry.getKey().getTaxRate();
+				total += entry.getKey().getPrice();
 				break;
 			}
 		}
@@ -83,7 +93,7 @@ public class Sale {
 	 */
 	public void addItem(ItemDTO item) {
 		items.put(item, 1);
-		total += item.getPrice() + item.getPrice() * item.getTaxRate();
+		total += item.getPrice();
 	}
 	
 	/**
@@ -96,12 +106,15 @@ public class Sale {
 		int change = payment - total;
 		return change;
 	}
-
+	
+	/**
+	 * Saves information about the sale to the receipt.
+	 * 
+	 * @param sale The sale to save to the receipt.
+	 * @param payment The payment obtained from the customer.
+	 * @param change The change to give back to the customer.
+	 */
 	public void saveReceipt(Sale sale, int payment, int change) {
 		receipt.saveReceipt(sale, payment, change);
-	}
-	
-	public Receipt getReceipt() {
-		return receipt;
 	}
 }

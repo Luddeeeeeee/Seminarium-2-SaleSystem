@@ -5,7 +5,6 @@ import main.se.kth.iv1350.Salesystem.integration.RegisterHandler;
 import main.se.kth.iv1350.Salesystem.model.ItemDTO;
 import main.se.kth.iv1350.Salesystem.model.Receipt;
 import main.se.kth.iv1350.Salesystem.model.Sale;
-import main.se.kth.iv1350.Salesystem.util.ItemID;
 import main.se.kth.iv1350.Salesystem.integration.ItemRegistryHandler;
 
 /**
@@ -35,9 +34,9 @@ public class Controller {
 	 * Adds an item to the current sale.
 	 * 
 	 * @param identifier The ItemID of the item to add.
-	 * @return
+	 * @return The added item.
 	 */
-	public ItemDTO addItem(ItemID identifier) {
+	public ItemDTO addItem(int identifier) {
 		ItemDTO item = null;
 		if(sale.itemScanned(identifier)) {
 			sale.updateQuantity(identifier);
@@ -49,6 +48,12 @@ public class Controller {
 		return item;
 	}
 	
+	/**
+	 * Ends the ongoing sale.
+	 * 
+	 * @param payment The amount paid by the customer.
+	 * @return Any change to give back to the customer.
+	 */
 	public int endSale(int payment) {
 		itemreghandler.updateInventory(sale.getItems());
 		acchandler.logAccounting(sale);

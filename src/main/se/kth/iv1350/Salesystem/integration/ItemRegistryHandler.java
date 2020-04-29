@@ -3,7 +3,6 @@ package main.se.kth.iv1350.Salesystem.integration;
 import java.util.HashMap;
 
 import main.se.kth.iv1350.Salesystem.model.ItemDTO;
-import main.se.kth.iv1350.Salesystem.util.ItemID;
 
 /**
  * A handler for the itemRegistry.
@@ -14,9 +13,9 @@ public class ItemRegistryHandler {
 	
 	public ItemRegistryHandler() {
 		itemregistry = new HashMap<ItemDTO,Integer>();
-		itemregistry.put(new ItemDTO(new ItemID(1111), 10, 0.125, "Beskrivning av vara 1" , "Vara 1"), 10);
-		itemregistry.put(new ItemDTO(new ItemID(1112), 15, 0.125, "Beskrivning av vara 2", "Vara 2"), 20);
-		itemregistry.put(new ItemDTO(new ItemID(1113), 20, 0.25, "Beskrivning av vara 3", "Vara 3"), 15);
+		itemregistry.put(new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varatyp 1"), 10);
+		itemregistry.put(new ItemDTO(1112, 15, 0.12, "Beskrivning av vara 2", "Varatyp 2"), 20);
+		itemregistry.put(new ItemDTO(1113, 20, 0.25, "Beskrivning av vara 3", "Varatyp 3"), 15);
 	}
 	
 	/**
@@ -25,7 +24,7 @@ public class ItemRegistryHandler {
 	 * @param identifier The identifier of the Item to fetch.
 	 * @return The searched Item.
 	 */
-	public ItemDTO getItem(ItemID identifier) {
+	public ItemDTO getItem(int identifier) {
 		ItemDTO item = null;
 		for(HashMap.Entry<ItemDTO, Integer> entry : itemregistry.entrySet()) {
 			if(identifier == entry.getKey().getIdentifier()) {
