@@ -2,6 +2,8 @@ package se.kth.iv1350.Salesystem.integration;
 
 import java.util.HashMap;
 
+import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
+import se.kth.iv1350.Salesystem.exceptions.NetworkException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 
 /**
@@ -23,14 +25,21 @@ public class ItemRegistryHandler {
 	 * 
 	 * @param identifier The identifier of the Item to fetch.
 	 * @return The searched Item.
+	 * @throws IllegalIdentifierException when the specified identifier is not supported.
 	 */
-	public ItemDTO getItem(int identifier) {
+	public ItemDTO getItem(int identifier) throws IllegalIdentifierException, NetworkException{
+		if (identifier == 9999) {
+			throw new NetworkException("Databasen går inte att nå");
+		}	
 		ItemDTO item = null;
 		for(HashMap.Entry<ItemDTO, Integer> entry : itemregistry.entrySet()) {
 			if(identifier == entry.getKey().getIdentifier()) {
 				item = entry.getKey();
 				break;
 			}
+		}
+		if (item == null) {
+			throw new IllegalIdentifierException("Okänd Varu ID");
 		}
 		return item;
 	}

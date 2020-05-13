@@ -8,7 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
+import se.kth.iv1350.Salesystem.view.TotalRevenueView;
 
 public class ControllerTest {
 	private Controller instanceToTest;
@@ -24,6 +26,7 @@ public class ControllerTest {
 	@Before
 	public void setUp() {
 		instanceToTest = new Controller();
+		instanceToTest.addTotalObserver(new TotalRevenueView());
 	}
 
 	@After
@@ -41,14 +44,22 @@ public class ControllerTest {
 		instanceToTest.startSale();
 		ItemDTO expResult = new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varatyp 1");
 		ItemDTO result = new ItemDTO(0,0,0,"","");
-		result = instanceToTest.addItem(1111);
-		assertEquals(expResult, result);
+		try {
+			result = instanceToTest.addItem(1111);
+		} catch (IllegalIdentifierException e) {
+			e.printStackTrace();
+		}
+		assertEquals(expResult.getName(), result.getName());
 	}
 	
 	@Test
 	public void testEndSale() {
 		instanceToTest.startSale();
-		instanceToTest.addItem(1111);
+		try {
+			instanceToTest.addItem(1111);
+		} catch (IllegalIdentifierException e) {
+			e.printStackTrace();
+		}
 		int payment = 20;
 		int expResult = 10;
 		int result = instanceToTest.endSale(payment);

@@ -1,6 +1,7 @@
 package se.kth.iv1350.Salesystem.view;
 
 import se.kth.iv1350.Salesystem.controller.Controller;
+import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 
 /**
@@ -12,6 +13,7 @@ public class View {
 	
 	public View(Controller contr) {
 		this.contr = contr;
+		contr.addTotalObserver(new TotalRevenueView());
 	}
 	
 	/**
@@ -19,16 +21,64 @@ public class View {
 	 */
 	public void runFakeExecution() {
 		contr.startSale();
-		System.out.println("A new sale has been started.");
-		ItemDTO item1 = contr.addItem(1111);
-		System.out.println("Added item: " + item1.toString() + ", Current total: " + contr.getSale().getTotal());
-		ItemDTO item2 = contr.addItem(1113);
-		System.out.println("Added item: " + item2.toString() + ", Current total: " + contr.getSale().getTotal());
-		ItemDTO item3 = contr.addItem(1111);
-		System.out.println("Added item: " + item3.toString() + ", Current total: " + contr.getSale().getTotal());
-		ItemDTO item4 = contr.addItem(1112);
-		System.out.println("Added item: " + item4.toString() + ", Current total: " + contr.getSale().getTotal());
+		System.out.println("För användare: A new sale has been started.");
+		
+		try {
+			contr.addItem(9999);
+		}catch(IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		try {
+			ItemDTO item1 = contr.addItem(1111);
+			System.out.println("För användare: Added item: " + item1.toString());
+		}catch(IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		try {
+			ItemDTO item2 = contr.addItem(1113);
+			System.out.println("För användare: Added item: " + item2.toString());
+		} catch (IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		try {
+			ItemDTO item3 = contr.addItem(1213);
+			System.out.println("För användare: Added item: " + item3.toString());
+		} catch (IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		
+		try {
+			ItemDTO item4 = contr.addItem(1111);
+			System.out.println("För användare: Added item: " + item4.toString());
+		} catch (IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		try {
+			ItemDTO item5 = contr.addItem(1112);
+			System.out.println("För användare: Added item: " + item5.toString());
+		} catch (IllegalIdentifierException iie) {
+			System.out.println("För Användare: " + iie.getMessage());
+			System.out.print("För Loggen: ");
+			iie.printStackTrace();
+		}
+		
+		
 		contr.endSale(100);
-		System.out.println("Sale Finished");
+		System.out.println("För användare: Sale Finished");
 	}
 }

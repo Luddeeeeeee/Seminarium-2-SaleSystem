@@ -8,12 +8,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import se.kth.iv1350.Salesystem.controller.Controller;
+import se.kth.iv1350.Salesystem.view.TotalRevenueView;
+
 public class SaleTest {
 	private Sale instanceToTest;
 	
 	@Before
 	public void setUp() throws Exception {
 		instanceToTest = new Sale();
+		instanceToTest.addTotalObserver(new TotalRevenueView());
 	}
 
 	@After

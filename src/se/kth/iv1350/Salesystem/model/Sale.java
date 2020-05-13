@@ -10,6 +10,7 @@ import java.util.HashMap;
  */
 public class Sale {
 
+	private TotalObserver totalObserver;
 	private String date;
 	private LocalTime saleTime;
 	private int total;
@@ -83,6 +84,7 @@ public class Sale {
 				int currentvalue = entry.getValue();
 				entry.setValue(currentvalue + 1);
 				total += entry.getKey().getPrice();
+				notifyObservers();
 				item = entry.getKey();
 				break;
 			}
@@ -98,6 +100,7 @@ public class Sale {
 	public void addItem(ItemDTO item) {
 		items.put(item, 1);
 		total += item.getPrice();
+		notifyObservers();
 	}
 	
 	/**
@@ -120,5 +123,17 @@ public class Sale {
 	 */
 	public void saveReceipt(Sale sale, int payment, int change) {
 		receipt.saveReceipt(sale, payment, change);
+	}
+	
+	private void notifyObservers() {
+		totalObserver.newTotal(this.total);
+	}
+	
+	/**
+	 * Adds the specified observer as a observer for the sale Total.
+	 * @param obs The observer to add.
+	 */
+	public void addTotalObserver(TotalObserver obs) {
+		this.totalObserver = obs;
 	}
 }
