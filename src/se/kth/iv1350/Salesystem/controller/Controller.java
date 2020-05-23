@@ -1,9 +1,9 @@
 package se.kth.iv1350.Salesystem.controller;
 
-import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
-import se.kth.iv1350.Salesystem.exceptions.NetworkException;
 import se.kth.iv1350.Salesystem.integration.AccountingHandler;
+import se.kth.iv1350.Salesystem.integration.IllegalIdentifierException;
 import se.kth.iv1350.Salesystem.integration.ItemRegistryHandler;
+import se.kth.iv1350.Salesystem.integration.NetworkException;
 import se.kth.iv1350.Salesystem.integration.RegisterHandler;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 import se.kth.iv1350.Salesystem.model.Receipt;
@@ -18,12 +18,10 @@ public class Controller {
 	private TotalObserver totalObserver;
 	private Sale sale;
 	private RegisterHandler reghandler;
-	private AccountingHandler acchandler;
 	private ItemRegistryHandler itemreghandler;
 	
 	public Controller() {
 		reghandler = new RegisterHandler();
-		acchandler = new AccountingHandler();
 		itemreghandler = new ItemRegistryHandler();
 	}
 	
@@ -45,8 +43,9 @@ public class Controller {
 	 * @param identifier The ItemID of the item to add.
 	 * @return The added item.
 	 * @throws IllegalIdentifierException when the inserted Item Identifier is not supported by the Itemregistry.
+	 * @throws InventoryException when the database cannot be reached.
 	 */
-	public ItemDTO addItem(int identifier) throws IllegalIdentifierException{
+	public ItemDTO addItem(int identifier) throws IllegalIdentifierException, InventoryException {
 		ItemDTO item = null;
 		if(sale.itemScanned(identifier)) {
 			item = sale.updateQuantity(identifier);
@@ -59,6 +58,7 @@ public class Controller {
 			 catch (NetworkException ne) {
 				 System.out.print("För Loggen: ");
 				 ne.printStackTrace();
+				 throw new InventoryException("Inventory failure", ne);
 			}
 		}
 		return item;
@@ -72,7 +72,7 @@ public class Controller {
 	 */
 	public int endSale(int payment) {
 		itemreghandler.updateInventory(sale.getItems());
-		acchandler.logAccounting(sale);
+		AccountingHandler.getInstance().logAccounting(sale);
 		int change = sale.endSale(payment);
 		sale.saveReceipt(sale, payment, change);
 		reghandler.registerPayment(sale.getTotal());

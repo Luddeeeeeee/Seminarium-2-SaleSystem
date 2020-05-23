@@ -3,25 +3,15 @@ package se.kth.iv1350.Salesystem.controller;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
+import se.kth.iv1350.Salesystem.integration.IllegalIdentifierException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 import se.kth.iv1350.Salesystem.view.TotalRevenueView;
 
 public class ControllerTest {
 	private Controller instanceToTest;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() {
-	}
 
 	@Before
 	public void setUp() {
@@ -42,11 +32,11 @@ public class ControllerTest {
 	@Test
 	public void testAddItem() {
 		instanceToTest.startSale();
-		ItemDTO expResult = new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varatyp 1");
+		ItemDTO expResult = new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varutyp 1");
 		ItemDTO result = new ItemDTO(0,0,0,"","");
 		try {
 			result = instanceToTest.addItem(1111);
-		} catch (IllegalIdentifierException e) {
+		} catch (IllegalIdentifierException | InventoryException e) {
 			e.printStackTrace();
 		}
 		assertEquals(expResult.getName(), result.getName());
@@ -57,7 +47,7 @@ public class ControllerTest {
 		instanceToTest.startSale();
 		try {
 			instanceToTest.addItem(1111);
-		} catch (IllegalIdentifierException e) {
+		} catch (IllegalIdentifierException | InventoryException e) {
 			e.printStackTrace();
 		}
 		int payment = 20;

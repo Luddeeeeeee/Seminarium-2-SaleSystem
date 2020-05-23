@@ -8,9 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
-import se.kth.iv1350.Salesystem.exceptions.NetworkException;
-
 public class ItemRegistryHandlerTest {
 	private ItemRegistryHandler instanceToTest;
 

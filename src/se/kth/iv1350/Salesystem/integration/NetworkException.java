@@ -1,4 +1,4 @@
-package se.kth.iv1350.Salesystem.exceptions;
+package se.kth.iv1350.Salesystem.integration;
 
 @SuppressWarnings("serial")
 public class NetworkException extends Exception {

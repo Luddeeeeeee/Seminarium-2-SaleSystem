@@ -1,7 +1,8 @@
 package se.kth.iv1350.Salesystem.view;
 
 import se.kth.iv1350.Salesystem.controller.Controller;
-import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
+import se.kth.iv1350.Salesystem.controller.InventoryException;
+import se.kth.iv1350.Salesystem.integration.IllegalIdentifierException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 
 /**
@@ -25,56 +26,44 @@ public class View {
 		
 		try {
 			contr.addItem(9999);
-		}catch(IllegalIdentifierException iie) {
+		}catch(IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		try {
 			ItemDTO item1 = contr.addItem(1111);
-			System.out.println("För användare: Added item: " + item1.toString());
-		}catch(IllegalIdentifierException iie) {
+			System.out.println("För användare: Added item: " + item1.toString() + ", Sale total: " + contr.getSale().getTotal());
+		}catch(IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		try {
 			ItemDTO item2 = contr.addItem(1113);
-			System.out.println("För användare: Added item: " + item2.toString());
-		} catch (IllegalIdentifierException iie) {
+			System.out.println("För användare: Added item: " + item2.toString() + ", Sale total: " + contr.getSale().getTotal());
+		} catch (IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		try {
 			ItemDTO item3 = contr.addItem(1213);
-			System.out.println("För användare: Added item: " + item3.toString());
-		} catch (IllegalIdentifierException iie) {
+			System.out.println("För användare: Added item: " + item3.toString() + ", Sale total: " + contr.getSale().getTotal());
+		} catch (IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		
 		try {
 			ItemDTO item4 = contr.addItem(1111);
-			System.out.println("För användare: Added item: " + item4.toString());
-		} catch (IllegalIdentifierException iie) {
+			System.out.println("För användare: Added item: " + item4.toString() + ", Sale total: " + contr.getSale().getTotal());
+		} catch (IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		try {
 			ItemDTO item5 = contr.addItem(1112);
-			System.out.println("För användare: Added item: " + item5.toString());
-		} catch (IllegalIdentifierException iie) {
+			System.out.println("För användare: Added item: " + item5.toString() + ", Sale total: " + contr.getSale().getTotal());
+		} catch (IllegalIdentifierException | InventoryException iie) {
 			System.out.println("För Användare: " + iie.getMessage());
-			System.out.print("För Loggen: ");
-			iie.printStackTrace();
 		}
 		
 		

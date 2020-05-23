@@ -3,23 +3,13 @@ package se.kth.iv1350.Salesystem.view;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import se.kth.iv1350.Salesystem.controller.Controller;
 
 public class ViewTest {
 	private View instanceToTest;
-	
-	@BeforeClass
-	public static void setUpBeforeClass() {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() {
-	}
 
 	@Before
 	public void setUp() {
@@ -34,7 +24,7 @@ public class ViewTest {
 
 	@Test
 	public void testRunFakeExecution() {
-		
+		instanceToTest.runFakeExecution();
 	}
 
 }

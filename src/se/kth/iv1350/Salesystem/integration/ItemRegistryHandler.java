@@ -2,8 +2,6 @@ package se.kth.iv1350.Salesystem.integration;
 
 import java.util.HashMap;
 
-import se.kth.iv1350.Salesystem.exceptions.IllegalIdentifierException;
-import se.kth.iv1350.Salesystem.exceptions.NetworkException;
 import se.kth.iv1350.Salesystem.model.ItemDTO;
 
 /**
@@ -15,9 +13,9 @@ public class ItemRegistryHandler {
 	
 	public ItemRegistryHandler() {
 		itemregistry = new HashMap<ItemDTO,Integer>();
-		itemregistry.put(new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varatyp 1"), 10);
-		itemregistry.put(new ItemDTO(1112, 15, 0.12, "Beskrivning av vara 2", "Varatyp 2"), 20);
-		itemregistry.put(new ItemDTO(1113, 20, 0.25, "Beskrivning av vara 3", "Varatyp 3"), 15);
+		itemregistry.put(new ItemDTO(1111, 10, 0.12, "Beskrivning av vara 1" , "Varutyp 1"), 10);
+		itemregistry.put(new ItemDTO(1112, 15, 0.12, "Beskrivning av vara 2", "Varutyp 2"), 20);
+		itemregistry.put(new ItemDTO(1113, 20, 0.25, "Beskrivning av vara 3", "Varutyp 3"), 15);
 	}
 	
 	/**
@@ -26,6 +24,7 @@ public class ItemRegistryHandler {
 	 * @param identifier The identifier of the Item to fetch.
 	 * @return The searched Item.
 	 * @throws IllegalIdentifierException when the specified identifier is not supported.
+	 * @throws NetworkException when the database is not available.
 	 */
 	public ItemDTO getItem(int identifier) throws IllegalIdentifierException, NetworkException{
 		if (identifier == 9999) {

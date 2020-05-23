@@ -16,13 +16,13 @@ public class TotalRevenueView implements TotalObserver{
 	}
 	
 	@Override
-	public void newTotal(int updatedTotal) {
-		updateTotal(updatedTotal);
+	public void newTotal(int newTotal) {
+		updateTotal(newTotal);
 		printCurrentState();
 	}
 	
-	private void updateTotal(int updatedTotal) {
-		total = updatedTotal;
+	private void updateTotal(int newTotal) {
+		total += newTotal;
 	}
 	
 	private void printCurrentState() {

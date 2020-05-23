@@ -7,6 +7,7 @@ import se.kth.iv1350.Salesystem.model.Receipt;
  */
 public class RegisterHandler {
 
+	@SuppressWarnings("unused")
 	private int registertotal;
 	
 	public RegisterHandler() {

@@ -9,11 +9,18 @@ import se.kth.iv1350.Salesystem.model.Sale;
  */
 public class AccountingHandler {
 
+	private static AccountingHandler onlyInstance;
 	private ArrayList<Sale> salelog;
 	
 
 	public AccountingHandler() {
 		salelog = new ArrayList<Sale>();
+	}
+	
+	public static AccountingHandler getInstance() {
+		if(onlyInstance == null)
+			onlyInstance = new AccountingHandler();
+		return onlyInstance;
 	}
 	
 	public void logAccounting(Sale sale) {

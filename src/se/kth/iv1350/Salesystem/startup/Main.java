@@ -18,5 +18,6 @@ public class Main {
 		View view = new View(contr);
 		
 		view.runFakeExecution();
+		view.runFakeExecution();
 	}
 }
